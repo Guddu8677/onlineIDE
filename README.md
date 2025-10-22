@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CipherStudio: A Browser-Based React IDE
 
-## Getting Started
+## Overview
 
-First, run the development server:
+CipherStudio is a web-based Integrated Development Environment (IDE) for React projects. It allows users to create, manage, edit, and preview React code directly within their browser. This project aims to simulate a real online development environment, providing users with a platform to experiment, learn, and prototype React applications.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*   **File Management:** Create, delete, and organize project files within the IDE.
+*   **Code Editor:** Edit React code with syntax highlighting and other editor features (powered by Sandpack).
+*   **Live Preview:** View the real-time output of the React project as the code changes.
+*   **Save & Load Projects:** Persist project state in local storage, allowing users to continue working on their projects later.
+*   **Theme Switcher:** Toggle between light and dark themes for a comfortable coding experience.
+*   **User Authentication:** Secure login and registration functionality.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+*   **Frontend:**
+    *   React
+    *   Next.js
+    *   @codesandbox/sandpack-react (for code execution)
+    *   uuid (for project ID creation)
+*   **Backend:**
+    *   Node.js
+    *   Next.js API routes
+    *   MongoDB (for user and project data storage)
+    *   jsonwebtoken (JWT) (for authentication)
+    *   bcryptjs (for password hashing)
+*   **Other:**
+    *   Local Storage (for project persistence)
 
-## Learn More
+## Setup and Installation
 
-To learn more about Next.js, take a look at the following resources:
+1.  **Clone the repository:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    git clone <your_repository_url>
+    cd cipherstudio-next
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2.  **Install dependencies:**
 
-## Deploy on Vercel
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3.  **Configure environment variables:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    *   Create a `.env.local` file in the project root.
+    *   Add the following variables, replacing the placeholders with your actual values:
+
+        ```
+        MONGODB_URI=your_mongodb_connection_string
+        JWT_SECRET=your_jwt_secret_key
+        ```
+
+4.  **Start the development server:**
+
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
+
+    Visit `http://localhost:3000` in your browser to access the IDE.
+
+## API Endpoints
+
+*   `/api/auth/login`: Handles user login.
+*   `/api/auth/register`: Handles user registration.
+*   `/api/projects`:
+    *   `GET`: Retrieves all projects for the current user.
+    *   `POST`: Creates a new project.
+*   `/api/projects/[id]`:
+    *   `GET`: Retrieves a single project by ID.
+    *   `PUT`: Updates a single project by ID.
+    *   `DELETE`: Deletes a single project by ID.
+
+## Directory Structure
