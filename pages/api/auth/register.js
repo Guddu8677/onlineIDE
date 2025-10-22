@@ -64,12 +64,13 @@ import { createJWT } from '../../../middlewares/auth';
 
 export default async function handler(req, res) {
   // Set CORS headers
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+ // pages/api/auth/register.js
+res.setHeader('Access-Control-Allow-Origin', process.env.NEXT_PUBLIC_CLIENT_URL || '*');
+res.setHeader('Access-Control-Allow-Credentials', 'true');
+res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+res.setHeader(
+  'Access-Control-Allow-Headers',
+  'Content-Type, Authorization, X-Requested-With, Accept'
   );
 
   // Handle preflight
