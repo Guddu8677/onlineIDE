@@ -48,33 +48,36 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (email, password) => {
-    try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+  try {
+    const response = await fetch('http://localhost:5000/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ 
-          message: `Server error: ${response.status}` 
-        }));
-        console.error("Registration failed:", errorData.message);
-        return false;
-      }
+    const data = await response.json().catch(() => null);
 
-      const data = await response.json();
+    if (!response.ok) {
+      console.error("Registration failed:", data?.message || response.statusText);
+      return false;
+    }
+
+    if (data?.token && data?.user) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
       setUser(data.user);
       return true;
-    } catch (error) {
-      console.error("Registration error:", error);
-      throw error;
+    } else {
+      console.error("Unexpected response format:", data);
+      return false;
     }
-  };
+
+  } catch (error) {
+    console.error("Registration error:", error);
+    return false;
+  }
+};
+
 
   const logout = () => {
     localStorage.removeItem('token');

@@ -162,11 +162,9 @@ export default async function handler(req, res) {
 
     const hashedPassword = await hashPassword(password);
 
-    // ✅ Safely create a unique username from email
     let baseUsername = email.split('@')[0];
     if (!baseUsername) baseUsername = `user${Date.now()}`;
 
-    // Ensure no duplicate username
     let finalUsername = baseUsername;
     let counter = 1;
     const User = (await import('../../../models/User')).default;
